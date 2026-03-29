@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Business News - Registro Diário de Novidades</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f4f7fa; color: #333; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 10px; }
+        h1 { margin: 0; font-size: 2.5em; }
+        .subtitle { font-size: 1.2em; opacity: 0.9; }
+        .news-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; margin-top: 30px; }
+        .news-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .news-card:hover { transform: translateY(-5px); }
+        .date { color: #667eea; font-weight: bold; font-size: 0.9em; }
+        .category { background: #e3f2fd; color: #1976d2; padding: 4px 8px; border-radius: 20px; font-size: 0.8em; font-weight: bold; }
+        h3 { margin: 10px 0; color: #333; }
+        .source { font-size: 0.85em; color: #666; margin-top: 10px; }
+        .add-form { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 30px; }
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        button { background: #667eea; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-size: 1em; }
+        button:hover { background: #5a67d8; }
+        #newsList { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🧠 IA Business News</h1>
+        <p class="subtitle">Registro Diário de Novidades no Mundo da IA para Negócios e Grandes Empresas</p>
+        <small>Atualizado até 29/03/2026</small>
+    </header>
+
+    <div class="add-form">
+        <h2>Adicionar Nova Notícia</h2>
+        <input type="text" id="title" placeholder="Título da notícia">
+        <input type="text" id="category" placeholder="Categoria (ex: Parcerias, Infraestrutura)">
+        <input type="date" id="date">
+        <textarea id="content" rows="4" placeholder="Conteúdo da notícia"></textarea>
+        <input type="text" id="source" placeholder="Fonte (URL ou nome)">
+        <button onclick="addNews()">Adicionar Notícia</button>
+    </div>
+
+    <div id="newsList" class="news-container">
+        <!-- Notícias iniciais baseadas em dados recentes -->
+        <div class="news-card">
+            <div class="date">29/03/2026</div>
+            <span class="category">Parcerias</span>
+            <h3>OpenAI e AWS: Acordo para Computação Empresarial</h3>
+            <p>OpenAI firmou acordo massivo com AWS para suportar workloads de IA em escala para grandes empresas.</p>
+            <div class="source">Fonte: RiskInfo.ai [web:2]</div>
+        </div>
+        <div class="news-card">
+            <div class="date">25/03/2026</div>
+            <span class="category">Infraestrutura</span>
+            <h3>Investimentos de US$ 650 bi em IA</h3>
+            <p>Big techs planejam investir bilhões em data centers e energia para IA empresarial em 2026.</p>
+            <div class="source">Fonte: YouTube & Reuters [web:11][web:20]</div>
+        </div>
+        <div class="news-card">
+            <div class="date">24/03/2026</div>
+            <span class="category">Segurança</span>
+            <h3>Databricks lança produto para cibersegurança</h3>
+            <p>Unifica dados para combater ataques por agentes de IA em empresas.</p>
+            <div class="source">Fonte: Exame [web:9]</div>
+        </div>
+        <div class="news-card">
+            <div class="date">18/03/2026</div>
+            <span class="category">Tendências</span>
+            <h3>Accenture integra Mistral AI</h3>
+            <p>Serviços para grandes companhias com foco em conformidade de dados.</p>
+            <div class="source">Fonte: RiskInfo.ai [web:2]</div>
+        </div>
+    </div>
+
+    <script>
+        function addNews() {
+            const title = document.getElementById('title').value;
+            const category = document.getElementById('category').value;
+            const date = document.getElementById('date').value || new Date().toISOString().split('T')[0];
+            const content = document.getElementById('content').value;
+            const source = document.getElementById('source').value;
+
+            if (!title || !content) {
+                alert('Preencha título e conteúdo!');
+                return;
+            }
+
+            const newsList = document.getElementById('newsList');
+            const newCard = document.createElement('div');
+            newCard.className = 'news-card';
+            newCard.innerHTML = `
+                <div class="date">${date}</div>
+                <span class="category">${category}</span>
+                <h3>${title}</h3>
+                <p>${content}</p>
+                <div class="source">Fonte: ${source}</div>
+            `;
+            newsList.insertBefore(newCard, newsList.firstChild);
+
+            // Limpar form
+            document.getElementById('title').value = '';
+            document.getElementById('category').value = '';
+            document.getElementById('content').value = '';
+            document.getElementById('source').value = '';
+        }
+
+        // Permitir Enter no textarea para adicionar
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                addNews();
+            }
+        });
+    </script>
+</body>
+</html>
